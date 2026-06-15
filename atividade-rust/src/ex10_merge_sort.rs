@@ -1,11 +1,54 @@
 // Exercício 10 — Merge Sort
-// Complexidade: O(n log n) — divide a lista em log n níveis, cada nível fazendo O(n) trabalho na fusão.
+//
+// Python original:
+//   def merge_sort(lista):
+//       if len(lista) <= 1:
+//           return lista
+//       meio = len(lista) // 2
+//       esquerda = merge_sort(lista[:meio])
+//       direita = merge_sort(lista[meio:])
+//       resultado = []
+//       i = j = 0
+//       while i < len(esquerda) and j < len(direita):
+//           if esquerda[i] <= direita[j]:
+//               resultado.append(esquerda[i]); i += 1
+//           else:
+//               resultado.append(direita[j]); j += 1
+//       resultado += esquerda[i:]
+//       resultado += direita[j:]
+//       return resultado
+//
+// Complexidade: O(n log n) — a divisão cria log n níveis de recursão,
+// e a fusão (merge) em cada nível percorre n elementos no total.
 
+// Recebemos Vec<i32> com posse porque o merge sort cria novos vetores
+// a cada chamada (não modifica no lugar como o bubble sort).
+// Se usássemos &[i32], precisaríamos copiar de qualquer forma.
+pub fn merge_sort(lista: Vec<i32>) -> Vec<i32> {
+    // caso base: lista com 0 ou 1 elemento já está ordenada
+    if lista.len() <= 1 {
+        return lista;
+    }
+
+    let meio = lista.len() / 2;
+
+    // lista[..meio].to_vec() cria um novo Vec copiando a primeira metade
+    // lista[meio..].to_vec() cria um novo Vec copiando a segunda metade
+    let esquerda = merge_sort(lista[..meio].to_vec());
+    let direita = merge_sort(lista[meio..].to_vec());
+
+    // junta os dois vetores já ordenados
+    merge(esquerda, direita)
+}
+
+// função auxiliar privada que intercala dois vetores ordenados
 fn merge(esquerda: Vec<i32>, direita: Vec<i32>) -> Vec<i32> {
+    // with_capacity evita realocações durante o push
     let mut resultado = Vec::with_capacity(esquerda.len() + direita.len());
-    let mut i = 0;
-    let mut j = 0;
+    let mut i = 0; // índice da esquerda
+    let mut j = 0; // índice da direita
 
+    // enquanto ambos os lados têm elementos, pega o menor
     while i < esquerda.len() && j < direita.len() {
         if esquerda[i] <= direita[j] {
             resultado.push(esquerda[i]);
@@ -16,22 +59,12 @@ fn merge(esquerda: Vec<i32>, direita: Vec<i32>) -> Vec<i32> {
         }
     }
 
-    // Adiciona os elementos restantes
+    // um dos lados ainda pode ter elementos restantes — adiciona tudo
+    // equivalente ao "resultado += esquerda[i:]" do Python
     resultado.extend_from_slice(&esquerda[i..]);
     resultado.extend_from_slice(&direita[j..]);
+
     resultado
-}
-
-pub fn merge_sort(lista: Vec<i32>) -> Vec<i32> {
-    if lista.len() <= 1 {
-        return lista; // caso base — devolve a posse
-    }
-
-    let meio = lista.len() / 2;
-    let esquerda = merge_sort(lista[..meio].to_vec());
-    let direita = merge_sort(lista[meio..].to_vec());
-
-    merge(esquerda, direita)
 }
 
 #[cfg(test)]

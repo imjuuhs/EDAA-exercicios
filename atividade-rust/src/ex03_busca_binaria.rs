@@ -1,25 +1,46 @@
 // Exercício 3 — Busca Binária
-// Complexidade: O(log n) — a cada iteração o espaço de busca é dividido ao meio.
-// A lista deve estar ordenada em ordem crescente.
+//
+// Python original:
+//   def busca_binaria(lista, alvo):
+//       esquerda, direita = 0, len(lista) - 1
+//       while esquerda <= direita:
+//           meio = (esquerda + direita) // 2
+//           if lista[meio] == alvo:
+//               return meio
+//           elif lista[meio] < alvo:
+//               esquerda = meio + 1
+//           else:
+//               direita = meio - 1
+//       return -1
+//
+// Complexidade: O(log n) — a cada iteração descartamos metade dos elementos.
+// Para n = 1.000.000, precisamos de no máximo ~20 iterações.
+//
+// ATENÇÃO: a lista precisa estar ordenada para funcionar corretamente.
 
+// Retornamos Option<usize> em vez de -1 porque usize (tipo de índice em Rust)
+// não pode ser negativo. Some(idx) quando encontrar, None quando não encontrar.
 pub fn busca_binaria(lista: &[i32], alvo: i32) -> Option<usize> {
+    // Usamos isize (com sinal) porque direita pode chegar a -1
+    // quando o alvo não existe e a busca esgota o espaço.
+    // Se usássemos usize, o underflow causaria panic em modo debug.
     let mut esquerda: isize = 0;
     let mut direita: isize = lista.len() as isize - 1;
 
     while esquerda <= direita {
         let meio = (esquerda + direita) / 2;
-        let idx = meio as usize;
+        let idx = meio as usize; // converte para acessar o slice (slice usa usize)
 
         if lista[idx] == alvo {
-            return Some(idx);
+            return Some(idx); // encontrou!
         } else if lista[idx] < alvo {
-            esquerda = meio + 1;
+            esquerda = meio + 1; // alvo está na metade direita
         } else {
-            direita = meio - 1;
+            direita = meio - 1; // alvo está na metade esquerda
         }
     }
 
-    None
+    None // não encontrou
 }
 
 #[cfg(test)]
