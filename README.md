@@ -1,6 +1,6 @@
 # EDAA — Estruturas de Dados e Análise de Algoritmos
 
-**Estudante:** Júlia Starling Negrini Fudoli  
+**Estudante:** Júlia Starling N. Fudoli  
 **RA:** 124222027  
 **Professor:** Alexandre de Oliveira  
 **Disciplina:** Estruturas de Dados e Análise de Algoritmos
