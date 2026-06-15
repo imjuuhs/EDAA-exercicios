@@ -1,0 +1,117 @@
+EXPERIMENTO: COMPARACAO DE ALGORITMOS DE BUSCA
+
+
+CENARIO 1: Elemento no inicio (melhor caso para interrupcao)
+
+============================================================
+Tamanho do vetor: 1000
+Elemento procurado: 5
+------------------------------------------------------------
+
+BUSCA SEQUENCIAL SIMPLES:
+  Resultado: Some(4)
+  Operacoes: 1000
+  Tempo: 584ns
+
+BUSCA SEQUENCIAL COM INTERRUPCAO:
+  Resultado: Some(4)
+  Operacoes: 5
+  Tempo: 166ns
+
+ANALISE COMPARATIVA:
+  Diferenca de operacoes: 995
+  Algoritmo com interrupcao foi mais rapido
+============================================================
+
+============================================================
+Tamanho do vetor: 100000
+Elemento procurado: 5
+------------------------------------------------------------
+
+BUSCA SEQUENCIAL SIMPLES:
+  Resultado: Some(4)
+  Operacoes: 100000
+  Tempo: 77.583µs
+
+BUSCA SEQUENCIAL COM INTERRUPCAO:
+  Resultado: Some(4)
+  Operacoes: 5
+  Tempo: 83ns
+
+ANALISE COMPARATIVA:
+  Diferenca de operacoes: 99995
+  Algoritmo com interrupcao foi mais rapido
+============================================================
+
+============================================================
+Tamanho do vetor: 1000000
+Elemento procurado: 5
+------------------------------------------------------------
+
+BUSCA SEQUENCIAL SIMPLES:
+  Resultado: Some(4)
+  Operacoes: 1000000
+  Tempo: 545.125µs
+
+BUSCA SEQUENCIAL COM INTERRUPCAO:
+  Resultado: Some(4)
+  Operacoes: 5
+  Tempo: 1.875µs
+
+ANALISE COMPARATIVA:
+  Diferenca de operacoes: 999995
+  Algoritmo com interrupcao foi mais rapido
+============================================================
+
+
+CENARIO 2: Elemento no meio do vetor
+
+============================================================
+Tamanho do vetor: 1000
+Elemento procurado: 500
+------------------------------------------------------------
+
+BUSCA SEQUENCIAL SIMPLES:
+  Resultado: Some(499)
+  Operacoes: 1000
+  Tempo: 625ns
+
+BUSCA SEQUENCIAL COM INTERRUPCAO:
+  Resultado: Some(499)
+  Operacoes: 500
+  Tempo: 542ns
+
+ANALISE COMPARATIVA:
+  Diferenca de operacoes: 500
+  Algoritmo com interrupcao foi mais rapido
+============================================================
+
+============================================================
+Tamanho do vetor: 100000
+Elemento procurado: 50000
+------------------------------------------------------------
+
+BUSCA SEQUENCIAL SIMPLES:
+  Resultado: Some(49999)
+  Operacoes: 100000
+  Tempo: 75.458µs
+
+BUSCA SEQUENCIAL COM INTERRUPCAO:
+  Resultado: Some(49999)
+  Operacoes: 50000
+  Tempo: 26.791µs
+
+ANALISE COMPARATIVA:
+  Diferenca de operacoes: 50000
+  Algoritmo com interrupcao foi mais rapido
+============================================================
+
+============================================================
+Tamanho do vetor: 1000000
+Elemento procurado: 500000
+------------------------------------------------------------
+
+BUSCA SEQUENCIAL SIMPLES:
+  Resultado: Some(499999)
+  Operacoes: 1000000
+  Tempo: 986.292µs
